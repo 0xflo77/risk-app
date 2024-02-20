@@ -1,17 +1,16 @@
 /* General layout */
 .questions-section {
   display: flex;
-  justify-content: space-around; /* Adjust as necessary for your layout */
-  margin-bottom: 20px;
+  justify-content: center; /* Center the panels horizontally */
+  gap: 50px; /* Creates a 50px gap between the panels */
 }
 
 /* Base panel styling */
 .panel {
-  padding: 20px;
-  margin: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
-  background-color: #fff; /* White background for the panel content */
+  flex-grow: 1; /* Allows panels to grow and fill the parent container */
+  margin: 20px; /* Optional: Adds some space around the panels */
+  max-width: calc(50% - 25px); /* Adjusts the width considering the gap */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Adds shadow for depth */
 }
 
 /* Panel header styling */
@@ -47,11 +46,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
+  padding: 10px;
 }
 
 .question label {
-  margin-right: 10px;
+  flex-basis: 60%;
+  flex-shrink: 0; /* Prevents the label from shrinking */
+  margin-right: 10px; /* Adds some space between the label and the dropdown */
+}
+
+.question select {
+  flex-basis: 40%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 select {
@@ -62,21 +70,22 @@ select {
   background-color: #fff;
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .questions-section {
-    flex-direction: column; /* Stack panels on smaller screens */
-  }
-
+@media (max-width: 768px) {
   .question {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch; /* Aligns children (label and select) to stretch full width */
   }
-
+  
+  .question label, .question select {
+    flex-basis: auto; /* Resets the width to auto for a stacked layout */
+    width: 100%; /* Ensures both label and select take the full width */
+  }
+  
   .question label {
-    margin-bottom: 5px;
+    margin-bottom: 5px; /* Adds space between the label and dropdown */
   }
 }
+
 /* Scores Section Styling */
 .scores-section {
   text-align: center; /* Centers the text */
@@ -97,4 +106,47 @@ select {
 .overall-score {
   font-weight: bold;
   color: #dc3545; /* Bootstrap danger color for emphasis */
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section-header {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  color: cornflowerblue;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  margin-bottom: 20px; /* Adjust spacing below the separator */
+}
+
+.question label {
+  display: block; /* Ensure the label is on its own line */
+  margin-bottom: 5px; /* Spacing between label and dropdown */
+}
+
+select {
+  width: 100%; /* Make select dropdowns full width */
+  padding: 8px;
+  margin-bottom: 15px; /* Spacing between questions */
+}
+
+.section-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.section-divider {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  height: 1px;
+  background-color: #ccc; /* Adjust the color as needed */
 }

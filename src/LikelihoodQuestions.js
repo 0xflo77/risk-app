@@ -1,48 +1,63 @@
-import React from 'react';
-import { likelihoodQuestionsConfig } from './QuestionsConfig';
-
-function Question({ question, onChange }) {
-  return (
-    <div className="question">
-      <label>{question.label}</label>
-      <select onChange={onChange} defaultValue="">
-        <option value="" disabled>Select an option</option>
-        {question.options.map(option => (
-          <option key={option.value} value={option.score}>{option.label}</option>
-        ))}
-      </select>
-    </div>
-  );
-}
+import React, { useState } from 'react';
+import { likelihoodQuestionsConfig } from './QuestionsConfig'; // Adjust the import path as needed
 
 function LikelihoodQuestions({ onScoreChange }) {
-    const [scores, setScores] = React.useState({
-        q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0
-    });
+    // Using an object to track scores by question key
+    const [scores, setScores] = useState({});
 
-    const updateScore = (questionId, newScore) => {
-        const updatedScores = { ...scores, [questionId]: newScore };
+    // Handle score update by question key
+    const updateScore = (questionKey, newScore) => {
+        const updatedScores = { ...scores, [questionKey]: newScore };
         setScores(updatedScores);
 
-        // Sum all scores and pass to parent component
         const totalScore = Object.values(updatedScores).reduce((total, currentScore) => total + currentScore, 0);
         onScoreChange(totalScore);
     };
-  
+
     return (
-    <div className="panel likelihood-panel">
-      <div className="panel-header">Likelihood</div>
-        <div className="questions-container">
-            {likelihoodQuestionsConfig.map(q => (
-                <Question
-                key={q.key}
-                question={q}
-                onChange={(e) => updateScore(q.key, Number(e.target.value))}
-                />
-            ))}
+        <div className="panel impact-panel">
+            <div className="panel-header">Likelihood</div>
+            <div className="questions-container">
+                <div className="section">
+                    <div className="section-header">Frequency Factors</div>
+                    <hr className="section-divider" />
+                    <Question
+                        question={likelihoodQuestionsConfig[0]}
+                        onChange={(e) => updateScore(likelihoodQuestionsConfig[0].key, Number(e.target.value))}
+                    />
+                </div>
+
+                
+
+                <div className="section">
+                    <div className="section-header">Vulnerability Factors</div>
+                    <hr className="section-divider" />
+                    {likelihoodQuestionsConfig.slice(1).map((question) => (
+                        <Question
+                            key={question.key}
+                            question={question}
+                            onChange={(e) => updateScore(question.key, Number(e.target.value))}
+                        />
+                    ))}
+                </div>
+            </div>
         </div>
-    </div>
-  );
+
+    );
+}
+
+function Question({ question, onChange }) {
+    return (
+        <div className="question">
+            <label>{question.label}</label>
+            <select onChange={onChange} defaultValue="">
+                <option value="" disabled>Select an option</option>
+                {question.options.map(option => (
+                    <option key={option.value} value={option.score}>{option.label}</option>
+                ))}
+            </select>
+        </div>
+    );
 }
 
 export default LikelihoodQuestions;
