@@ -1,38 +1,100 @@
-.App {
-  text-align: center;
+/* General layout */
+.questions-section {
+  display: flex;
+  justify-content: space-around; /* Adjust as necessary for your layout */
+  margin-bottom: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Base panel styling */
+.panel {
+  padding: 20px;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
+  background-color: #fff; /* White background for the panel content */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Panel header styling */
+.panel-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px; /* Space between header and questions */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Likelihood Panel */
+.likelihood-panel .panel-header {
+  background-color: #007bff; /* Bootstrap primary blue */
+  color: #fff; /* White text */
+  padding: 10px;
+  border-radius: 8px 8px 0 0; /* Rounded top corners */
+}
+
+/* Impact Panel */
+.impact-panel .panel-header {
+  background-color: #28a745; /* Bootstrap success green */
+  color: #fff; /* White text */
+  padding: 10px;
+  border-radius: 8px 8px 0 0; /* Rounded top corners */
+}
+
+/* Questions container */
+.questions-container {
   display: flex;
   flex-direction: column;
+}
+
+.question {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+.question label {
+  margin-right: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+select {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333;
+  background-color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .questions-section {
+    flex-direction: column; /* Stack panels on smaller screens */
   }
-  to {
-    transform: rotate(360deg);
+
+  .question {
+    flex-direction: column;
+    align-items: flex-start;
   }
+
+  .question label {
+    margin-bottom: 5px;
+  }
+}
+/* Scores Section Styling */
+.scores-section {
+  text-align: center; /* Centers the text */
+  margin-top: 20px; /* Adds space above the scores section */
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f9fa; /* Light background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.score-item {
+  margin: 10px 0; /* Adds vertical space between score items */
+  font-size: 18px; /* Larger font size for better readability */
+  color: #333; /* Dark color for text */
+}
+
+/* Optional: Style for emphasizing the overall risk score */
+.overall-score {
+  font-weight: bold;
+  color: #dc3545; /* Bootstrap danger color for emphasis */
 }
